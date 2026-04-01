@@ -114,7 +114,7 @@ def generate():
                            [0, -1, 0]])
         result = cv2.filter2D(result, -1, kernel)
 
-        # Smooth
+        # Smooth (noise remove)
         result = cv2.bilateralFilter(result, 9, 75, 75)
 
         # -------- PASSPORT SIZE --------
@@ -152,7 +152,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-# ---------------- RUN FOR RENDER ----------------
+# ---------------- RUN APP ----------------
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=10000)
