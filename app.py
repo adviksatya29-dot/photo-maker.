@@ -1,12 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for
 import os
 import cv2
 import numpy as np
 from rembg import remove
-import json
 
 app = Flask(__name__)
-app.secret_key = "secret123"
 
 UPLOAD_FOLDER = "uploads"
 OUTPUT_FOLDER = "static"
@@ -15,31 +13,9 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
-# ---------------- LOGIN ----------------
+# ---------------- HOME (DASHBOARD) ----------------
 @app.route("/", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        with open("users.json", "r") as f:
-            users = json.load(f)
-
-        if username in users and users[username] == password:
-            session["user"] = username
-            return redirect(url_for("dashboard"))
-        else:
-            return render_template("login.html", error="Wrong username or password")
-
-    return render_template("login.html")
-
-
-# ---------------- DASHBOARD ----------------
-@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
     if request.method == "POST":
         file = request.files.get("photo")
         if file:
@@ -53,9 +29,6 @@ def dashboard():
 # ---------------- GENERATE ----------------
 @app.route("/generate", methods=["POST"])
 def generate():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
     try:
         # -------- COPIES --------
         copies = request.form.get("copies")
@@ -143,13 +116,6 @@ def generate():
 
     except Exception as e:
         return f"Error: {str(e)}"
-
-
-# ---------------- LOGOUT ----------------
-@app.route("/logout")
-def logout():
-    session.clear()
-    return redirect(url_for("login"))
 
 
 # ---------------- RUN APP ----------------
