@@ -1,39 +1,96 @@
 body.bg {
-    background: linear-gradient(to right, #1e3c72, #2a5298);
-    font-family: Arial;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
 }
 
+/* CARD DESIGN */
 .card {
-    background: white;
-    padding: 30px;
-    width: 350px;
+    background: #ffffff;
+    padding: 30px 25px;
+    width: 360px;
     margin: 80px auto;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
 }
 
+/* TITLE */
+.card h2 {
+    margin-bottom: 20px;
+    color: #1e3c72;
+}
+
+/* INPUT + SELECT */
 input, select {
-    width: 90%;
-    padding: 10px;
-    margin: 10px;
+    width: 92%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
 }
 
+input:focus, select:focus {
+    border-color: #2a5298;
+    box-shadow: 0 0 5px rgba(42, 82, 152, 0.4);
+}
+
+/* BUTTON */
 button {
-    background: #2a5298;
+    background: linear-gradient(to right, #2a5298, #1e3c72);
     color: white;
-    padding: 10px;
+    padding: 12px;
     border: none;
     width: 95%;
+    border-radius: 8px;
+    font-size: 15px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
+button:hover {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    transform: scale(1.03);
+}
+
+/* IMAGE PREVIEW */
 .preview {
-    width: 200px;
-    border: 3px solid black;
+    width: 220px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 3px solid #1e3c72;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* RESULT IMAGE */
 .result {
     width: 100%;
-    border: 5px solid black;
+    border-radius: 10px;
+    border: 5px solid #1e3c72;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* LABEL */
+label {
+    display: block;
+    text-align: left;
+    margin-left: 5%;
+    font-size: 13px;
+    color: #333;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
